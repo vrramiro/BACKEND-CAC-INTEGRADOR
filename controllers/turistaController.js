@@ -94,19 +94,9 @@ const updateTurista = (req, res) => {
 const deleteTurista = (req, res) => {
     const { id } = req.params;
 
-    const sql1 = "DELETE FROM atraccion_turista WHERE id_turista = ?";
+    const sql = "DELETE FROM turista WHERE id_turista = ?";
 
-    db.query(sql1, [id], (err, result) => {
-        if (err) {
-            throw err;
-        }
-
-        return res.status(200).json(result);
-    });
-
-    const sql2 = "DELETE FROM turista WHERE id_turista = ?";
-
-    db.query(sql2, [id], (err, result) => {
+    db.query(sql, [id], (err, result) => {
         if (err) {
             throw err;
         }
