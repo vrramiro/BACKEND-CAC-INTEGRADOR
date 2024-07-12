@@ -94,14 +94,21 @@ const updateTurista = (req, res) => {
 const deleteTurista = (req, res) => {
     const { id } = req.params;
 
-    const sql = "DELETE FROM turista WHERE id_turista = ?";
+    const sql1 = "DELETE FROM atraccion_turista WHERE id_turista = ?"
+    const sql2 = "DELETE FROM turista WHERE id_turista = ?";
 
-    db.query(sql, [id], (err, result) => {
+    db.query(sql1, [id], (err, result) => {
         if (err) {
             throw err;
         }
 
-        return res.status(200).json(result);
+        db.query(sql2, [id], (err, result) => {
+            if (err) {
+                throw err;
+            }
+
+            return res.status(200).json({ message: "Turista eliminado con exito" });
+        });
     });
 };
 
